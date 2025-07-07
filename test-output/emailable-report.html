@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "https://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="https://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+<title>TestNG Report</title>
+<style type="text/css">table {margin-bottom:10px;border-collapse:collapse;empty-cells:show}th,td {border:1px solid #009;padding:.25em .5em}th {vertical-align:bottom}td {vertical-align:top}table a {font-weight:bold}.stripe td {background-color: #E6EBF9}.num {text-align:right}.passedodd td {background-color: #3F3}.passedeven td {background-color: #0A0}.skippedodd td {background-color: #DDD}.skippedeven td {background-color: #CCC}.failedodd td,.attn {background-color: #F33}.failedeven td,.stripe .attn {background-color: #D00}.stacktrace {white-space:pre;font-family:monospace}.totop {font-size:85%;text-align:center;border-bottom:2px solid #000}.invisible {display:none}</style>
+</head>
+<body>
+<table>
+<tr><th>Test</th><th># Passed</th><th># Skipped</th><th># Retried</th><th># Failed</th><th>Time (ms)</th><th>Included Groups</th><th>Excluded Groups</th></tr>
+<tr><th colspan="8">EbaySuite</th></tr>
+<tr><td><a href="#t0">HomePage Test</a></td><td class="num">10</td><td class="num">0</td><td class="num">0</td><td class="num attn">1</td><td class="num">104,790</td><td></td><td></td></tr>
+</table>
+<table id='summary'><thead><tr><th>Class</th><th>Method</th><th>Start</th><th>Time (ms)</th></tr></thead><tbody><tr><th colspan="4">EbaySuite</th></tr></tbody><tbody id="t0"><tr><th colspan="4">HomePage Test &#8212; failed</th></tr><tr class="failedeven"><td rowspan="1">com.ebay.Tests.SignUpTest</td><td><a href="#m0">ClickSignUpButton</a></td><td rowspan="1">1751875032911</td><td rowspan="1">30389</td></tr><tr><th colspan="4">HomePage Test &#8212; passed</th></tr><tr class="passedeven"><td rowspan="10">com.ebay.Tests.HomePageTest</td><td><a href="#m1">CheckCartIcon</a></td><td rowspan="1">1751875022053</td><td rowspan="1">96</td></tr><tr class="passedeven"><td><a href="#m2">CheckResultDisplayingAfterEnteringText</a></td><td rowspan="1">1751874965909</td><td rowspan="1">52081</td></tr><tr class="passedeven"><td><a href="#m3">CheckSignInOption</a></td><td rowspan="1">1751875019333</td><td rowspan="1">2717</td></tr><tr class="passedeven"><td><a href="#m4">CheckTopNavigationBarLinks</a></td><td rowspan="1">1751875017991</td><td rowspan="1">61</td></tr><tr class="passedeven"><td><a href="#m5">TestFooterLinks</a></td><td rowspan="1">1751875028387</td><td rowspan="1">4519</td></tr><tr class="passedeven"><td><a href="#m6">TestIsEbayLogoDisplayed</a></td><td rowspan="1">1751874958847</td><td rowspan="1">3835</td></tr><tr class="passedeven"><td><a href="#m7">TestIsSearchInputFieldDisplayed</a></td><td rowspan="1">1751874962686</td><td rowspan="1">92</td></tr><tr class="passedeven"><td><a href="#m8">TestLinkCorrectlyRedirecting</a></td><td rowspan="1">1751875018056</td><td rowspan="1">1276</td></tr><tr class="passedeven"><td><a href="#m9">TestShopByCategories_Headings</a></td><td rowspan="1">1751875022152</td><td rowspan="1">6233</td></tr><tr class="passedeven"><td><a href="#m10">TestWithoutEnterTextClickOnSearchIcon</a></td><td rowspan="1">1751874962779</td><td rowspan="1">3129</td></tr></tbody>
+</table>
+<h2>HomePage Test</h2><h3 id="m0">com.ebay.Tests.SignUpTest#ClickSignUpButton</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {&quot;method&quot;:&quot;xpath&quot;,&quot;selector&quot;:&quot;//iframe[contains(@title,&apos;Widget containing checkbox &apos;)]&quot;}
+  (Session info: chrome=138.0.7204.97)
+For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+Build info: version: &apos;4.22.0&apos;, revision: &apos;c5f3146703*&apos;
+System info: os.name: &apos;Windows 11&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;17.0.8.1&apos;
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [0a9e821963086763a011b9f9879ff584, findElement {value=//iframe[contains(@title,&apos;Widget containing checkbox &apos;)], using=xpath}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 138.0.7204.97, chrome: {chromedriverVersion: 138.0.7204.49 (d2b48fd5f781..., userDataDir: C:\Users\61073077\AppData\L...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:64619}, networkConnectionEnabled: false, pageLoadStrategy: none, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:64619/devtoo..., se:cdpVersion: 138.0.7204.97, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 0a9e821963086763a011b9f9879ff584
+	at org.openqa.selenium.remote.ErrorCodec.decode(ErrorCodec.java:167)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:138)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:50)
+	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:190)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.invokeExecute(DriverCommandExecutor.java:216)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:174)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:518)
+	at org.openqa.selenium.remote.ElementLocation$ElementFinder$2.findElement(ElementLocation.java:165)
+	at org.openqa.selenium.remote.ElementLocation.findElement(ElementLocation.java:59)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:355)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:349)
+	at com.ebay.pages.SignUpPage.ClickCaptcha(SignUpPage.java:45)
+	at com.ebay.Tests.SignUpTest.ClickSignUpButton(SignUpTest.java:38)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+... Removed 32 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m1">com.ebay.Tests.HomePageTest#CheckCartIcon</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m2">com.ebay.Tests.HomePageTest#CheckResultDisplayingAfterEnteringText</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m3">com.ebay.Tests.HomePageTest#CheckSignInOption</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m4">com.ebay.Tests.HomePageTest#CheckTopNavigationBarLinks</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m5">com.ebay.Tests.HomePageTest#TestFooterLinks</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m6">com.ebay.Tests.HomePageTest#TestIsEbayLogoDisplayed</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m7">com.ebay.Tests.HomePageTest#TestIsSearchInputFieldDisplayed</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m8">com.ebay.Tests.HomePageTest#TestLinkCorrectlyRedirecting</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m9">com.ebay.Tests.HomePageTest#TestShopByCategories_Headings</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m10">com.ebay.Tests.HomePageTest#TestWithoutEnterTextClickOnSearchIcon</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+</body>
+</html>
