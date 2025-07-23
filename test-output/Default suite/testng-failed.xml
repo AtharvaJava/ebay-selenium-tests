@@ -3,16 +3,11 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="com.ebay.Tests.HomePageTest">
+      <class name="com.ebay.PerformanceTesting.HomePageLoadTest">
         <methods>
-          <include name="CheckCartIcon"/>
-          <include name="CheckSignInOption"/>
-          <include name="TestFooterLinks"/>
-          <include name="TestShopByCategories_Headings"/>
-          <include name="SetUp"/>
-          <include name="Quit"/>
+          <include name="HomePagePerformanceTest" invocation-numbers="3 1 2 0"/>
         </methods>
-      </class> <!-- com.ebay.Tests.HomePageTest -->
+      </class> <!-- com.ebay.PerformanceTesting.HomePageLoadTest -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

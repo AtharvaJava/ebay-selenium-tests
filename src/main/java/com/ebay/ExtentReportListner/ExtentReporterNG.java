@@ -14,6 +14,8 @@ import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.xml.XmlSuite;
 
+import com.ebay.base.DriverFactory;
+import com.ebay.utils.ScreenshotUtil;
 import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
@@ -54,6 +56,8 @@ public class ExtentReporterNG implements IReporter {
 
 				for (String group : result.getMethod().getGroups())
 					test.assignCategory(group);
+				
+
 
 				if (result.getThrowable() != null) {
 					test.log(status, result.getThrowable());

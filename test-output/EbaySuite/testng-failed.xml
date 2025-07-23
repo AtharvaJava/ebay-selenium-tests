@@ -2,17 +2,18 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="Failed suite [EbaySuite]" guice-stage="DEVELOPMENT">
   <listeners>
-    <listener class-name="com.ebay.ExtentReportListner.ExtentReporterNG"/>
+    <listener class-name="com.ebay.Listener.TestListner"/>
   </listeners>
   <test thread-count="5" name="HomePage Test(failed)">
     <classes>
-      <class name="com.ebay.Tests.SignUpTest">
+      <class name="com.ebay.Tests.SearchResultTest">
         <methods>
+          <include name="VerifyPagination"/>
+          <include name="VerifyLikeButton"/>
           <include name="SetUp"/>
-          <include name="ClickSignUpButton"/>
-          <include name="QuitDriver"/>
+          <include name="Quit"/>
         </methods>
-      </class> <!-- com.ebay.Tests.SignUpTest -->
+      </class> <!-- com.ebay.Tests.SearchResultTest -->
     </classes>
   </test> <!-- HomePage Test(failed) -->
 </suite> <!-- Failed suite [EbaySuite] -->

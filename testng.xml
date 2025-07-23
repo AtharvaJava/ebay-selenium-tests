@@ -6,12 +6,17 @@
 		  <listener class-name="com.ebay.ExtentReportListner.ExtentReporterNG"/>
 	</listeners>
 	
+	
+<listeners>
+        <listener class-name="com.ebay.Listener.TestListner"/>
+    </listeners>
+
 		
 	<test name="HomePage Test" >
 		  <classes>
-			 
+			      <class name="com.ebay.Tests.SearchResultTest"></class>
 			      <class name="com.ebay.Tests.HomePageTest"></class>
-			      <class name="com.ebay.Tests.SignUpTest"></class>
+			     <class name="com.ebay.Tests.SignUpTest"></class>
 		  </classes>
 	</test>
   

@@ -44,7 +44,7 @@ public class SignUpTest extends Base {
 		    
 			if(Objects.nonNull(DriverFactory.getDriver())) {
 				   
-				DriverFactory.getDriver().quit();
+			        DriverFactory.getDriver().quit();
 				
 			}
 	 }
