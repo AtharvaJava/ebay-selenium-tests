@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+
 <suite name="EbaySuite">
 	
-	<listeners>
+
+<listeners>
 		  <listener class-name="com.ebay.ExtentReportListner.ExtentReporterNG"/>
+		  <listener class-name="com.ebay.Listener.TestListner"/>
 	</listeners>
 	
 	
-<listeners>
-        <listener class-name="com.ebay.Listener.TestListner"/>
-    </listeners>
-
-		
 	<test name="HomePage Test" >
 		  <classes>
 			      <class name="com.ebay.Tests.SearchResultTest"></class>

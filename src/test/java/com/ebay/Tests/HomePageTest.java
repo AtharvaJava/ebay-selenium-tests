@@ -19,12 +19,14 @@ import org.testng.annotations.Test;
 import com.ebay.base.Base;
 import com.ebay.base.DriverFactory;
 import com.ebay.pages.HomePage;
-import com.github.dockerjava.zerodep.shaded.org.apache.hc.core5.util.Asserts;
+import com.ebay.utils.ScreenshotUtil;
+
 
 public class HomePageTest extends Base {
 	
 	HomePage hp;
 	
+
 
 	public HomePageTest() {
 		  
@@ -43,10 +45,14 @@ public class HomePageTest extends Base {
 	
 	@Test(priority=1)
 	public void TestIsEbayLogoDisplayed() throws InterruptedException {
-		    
-		  hp.isEbayLogoDisplayed();
+		
+		String Testname="EbayLogo";
+	
+
+			  hp.isEbayLogoDisplayed();
+			  
+			  Thread.sleep(2000);   
 		  
-		  Thread.sleep(2000);
 	}
 	
 	@Test (priority=2)
@@ -119,56 +125,7 @@ public class HomePageTest extends Base {
     	  
     	  hp.VerifyShopByCategory_Headings();
     }
-    
-//	@Test (priority=2)
-//	public void ClickShopByCategory() throws InterruptedException {
-//		      
-//		hp.Click_ShopByCategory();
-//		
-//		Thread.sleep(3000);
-//	}
-	
-//	@Test(priority=3)
-//	public void ClickAccesorriesPart() throws InterruptedException {
-//		    
-//		hp.Click_PartAccessories();
-//		
-//		Thread.sleep(3000);
-//		
-//	}
-	
-//	@Test (priority=4)
-//	public void ClickDailyDeals() throws InterruptedException {
-//		    
-//		 hp.DailyDealsLink();
-//		 
-//		 Thread.sleep(3000);
-//	}
-////	
-//	@Test(priority=5)
-//	public void ClickGiftCard() throws InterruptedException {
-//		    
-//		hp.GiftCardLink();
-//		
-//		Thread.sleep(2000);
-//		
-//	}
-//	
-//	@Test(priority=6)
-//	public void CheckHomePageLinkText() throws InterruptedException {
-//		     
-//		 hp.HomePages_Links();
-//		 
-//		 Thread.sleep(2000);
-//	}
-//	
-//	@Test (priority=7)
-//	public void CheckSearchTextBox() throws InterruptedException {
-//		  
-//		hp.SearchTextBox();
-//		
-//		Thread.sleep(2000);
-//	}
+
 
 		
 	@AfterSuite

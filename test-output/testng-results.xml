@@ -1,141 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="0" total="4" passed="0" failed="4" skipped="0">
+<testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2025-07-23T23:36:20 IST" name="Default suite" finished-at="2025-07-23T23:38:20 IST" duration-ms="120301">
+  <suite started-at="2025-07-29T00:25:57 IST" name="Default suite" finished-at="2025-07-29T00:28:28 IST" duration-ms="151568">
     <groups>
     </groups>
-    <test started-at="2025-07-23T23:36:20 IST" name="Default test" finished-at="2025-07-23T23:38:20 IST" duration-ms="120301">
-      <class name="com.ebay.PerformanceTesting.HomePageLoadTest">
-        <test-method signature="HomePagePerformanceTest(java.lang.String)[pri:0, instance:com.ebay.PerformanceTesting.HomePageLoadTest@5ab956d7]" started-at="2025-07-23T23:36:20 IST" name="HomePagePerformanceTest" data-provider="SearchItems" finished-at="2025-07-23T23:38:20 IST" duration-ms="120174" status="FAIL">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[headphones]]>
-              </value>
-            </param>
-          </params>
-          <exception class="org.testng.internal.thread.ThreadTimeoutException">
-            <message>
-              <![CDATA[Method com.ebay.PerformanceTesting.HomePageLoadTest.HomePagePerformanceTest() didn't finish within the time-out 120000]]>
-            </message>
-            <full-stacktrace>
-              <![CDATA[org.testng.internal.thread.ThreadTimeoutException: Method com.ebay.PerformanceTesting.HomePageLoadTest.HomePagePerformanceTest() didn't finish within the time-out 120000
-at org.testng.internal.MethodInvocationHelper.invokeWithTimeoutWithNoExecutor(MethodInvocationHelper.java:348)
-at org.testng.internal.MethodInvocationHelper.invokeWithTimeout(MethodInvocationHelper.java:281)
-at org.testng.internal.TestInvoker.invokeMethod(TestInvoker.java:604)
-at org.testng.internal.TestInvoker.invokeTestMethod(TestInvoker.java:173)
-at org.testng.internal.TestMethodWithDataProviderMethodWorker.call(TestMethodWithDataProviderMethodWorker.java:77)
-at org.testng.internal.TestMethodWithDataProviderMethodWorker.call(TestMethodWithDataProviderMethodWorker.java:15)
-at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
-at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:539)
-at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
-at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
-at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
-at java.base/java.lang.Thread.run(Thread.java:833)
-]]>
-            </full-stacktrace>
-          </exception> <!-- org.testng.internal.thread.ThreadTimeoutException -->
+    <test started-at="2025-07-29T00:25:57 IST" name="Default test" finished-at="2025-07-29T00:28:28 IST" duration-ms="151568">
+      <class name="com.ebay.PerformanceTesting.SearchResultLoadTest">
+        <test-method signature="SearchResultPage()[pri:0, instance:com.ebay.PerformanceTesting.SearchResultLoadTest@f0c8a99]" started-at="2025-07-29T00:25:57 IST" name="SearchResultPage" finished-at="2025-07-29T00:28:28 IST" duration-ms="151540" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- HomePagePerformanceTest -->
-        <test-method signature="HomePagePerformanceTest(java.lang.String)[pri:0, instance:com.ebay.PerformanceTesting.HomePageLoadTest@5ab956d7]" started-at="2025-07-23T23:36:20 IST" name="HomePagePerformanceTest" data-provider="SearchItems" finished-at="2025-07-23T23:38:20 IST" duration-ms="120053" status="FAIL">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[smartphone]]>
-              </value>
-            </param>
-          </params>
-          <exception class="org.testng.internal.thread.ThreadTimeoutException">
-            <message>
-              <![CDATA[Method com.ebay.PerformanceTesting.HomePageLoadTest.HomePagePerformanceTest() didn't finish within the time-out 120000]]>
-            </message>
-            <full-stacktrace>
-              <![CDATA[org.testng.internal.thread.ThreadTimeoutException: Method com.ebay.PerformanceTesting.HomePageLoadTest.HomePagePerformanceTest() didn't finish within the time-out 120000
-at org.testng.internal.MethodInvocationHelper.invokeWithTimeoutWithNoExecutor(MethodInvocationHelper.java:348)
-at org.testng.internal.MethodInvocationHelper.invokeWithTimeout(MethodInvocationHelper.java:281)
-at org.testng.internal.TestInvoker.invokeMethod(TestInvoker.java:604)
-at org.testng.internal.TestInvoker.invokeTestMethod(TestInvoker.java:173)
-at org.testng.internal.TestMethodWithDataProviderMethodWorker.call(TestMethodWithDataProviderMethodWorker.java:77)
-at org.testng.internal.TestMethodWithDataProviderMethodWorker.call(TestMethodWithDataProviderMethodWorker.java:15)
-at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
-at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:539)
-at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
-at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
-at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
-at java.base/java.lang.Thread.run(Thread.java:833)
-]]>
-            </full-stacktrace>
-          </exception> <!-- org.testng.internal.thread.ThreadTimeoutException -->
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- HomePagePerformanceTest -->
-        <test-method signature="HomePagePerformanceTest(java.lang.String)[pri:0, instance:com.ebay.PerformanceTesting.HomePageLoadTest@5ab956d7]" started-at="2025-07-23T23:36:20 IST" name="HomePagePerformanceTest" data-provider="SearchItems" finished-at="2025-07-23T23:38:20 IST" duration-ms="120049" status="FAIL">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[camera]]>
-              </value>
-            </param>
-          </params>
-          <exception class="org.testng.internal.thread.ThreadTimeoutException">
-            <message>
-              <![CDATA[Method com.ebay.PerformanceTesting.HomePageLoadTest.HomePagePerformanceTest() didn't finish within the time-out 120000]]>
-            </message>
-            <full-stacktrace>
-              <![CDATA[org.testng.internal.thread.ThreadTimeoutException: Method com.ebay.PerformanceTesting.HomePageLoadTest.HomePagePerformanceTest() didn't finish within the time-out 120000
-at org.testng.internal.MethodInvocationHelper.invokeWithTimeoutWithNoExecutor(MethodInvocationHelper.java:348)
-at org.testng.internal.MethodInvocationHelper.invokeWithTimeout(MethodInvocationHelper.java:281)
-at org.testng.internal.TestInvoker.invokeMethod(TestInvoker.java:604)
-at org.testng.internal.TestInvoker.invokeTestMethod(TestInvoker.java:173)
-at org.testng.internal.TestMethodWithDataProviderMethodWorker.call(TestMethodWithDataProviderMethodWorker.java:77)
-at org.testng.internal.TestMethodWithDataProviderMethodWorker.call(TestMethodWithDataProviderMethodWorker.java:15)
-at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
-at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:539)
-at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
-at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
-at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
-at java.base/java.lang.Thread.run(Thread.java:833)
-]]>
-            </full-stacktrace>
-          </exception> <!-- org.testng.internal.thread.ThreadTimeoutException -->
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- HomePagePerformanceTest -->
-        <test-method signature="HomePagePerformanceTest(java.lang.String)[pri:0, instance:com.ebay.PerformanceTesting.HomePageLoadTest@5ab956d7]" started-at="2025-07-23T23:36:20 IST" name="HomePagePerformanceTest" data-provider="SearchItems" finished-at="2025-07-23T23:38:20 IST" duration-ms="120176" status="FAIL">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[laptop]]>
-              </value>
-            </param>
-          </params>
-          <exception class="org.testng.internal.thread.ThreadTimeoutException">
-            <message>
-              <![CDATA[Method com.ebay.PerformanceTesting.HomePageLoadTest.HomePagePerformanceTest() didn't finish within the time-out 120000]]>
-            </message>
-            <full-stacktrace>
-              <![CDATA[org.testng.internal.thread.ThreadTimeoutException: Method com.ebay.PerformanceTesting.HomePageLoadTest.HomePagePerformanceTest() didn't finish within the time-out 120000
-at org.testng.internal.MethodInvocationHelper.invokeWithTimeoutWithNoExecutor(MethodInvocationHelper.java:348)
-at org.testng.internal.MethodInvocationHelper.invokeWithTimeout(MethodInvocationHelper.java:281)
-at org.testng.internal.TestInvoker.invokeMethod(TestInvoker.java:604)
-at org.testng.internal.TestInvoker.invokeTestMethod(TestInvoker.java:173)
-at org.testng.internal.TestMethodWithDataProviderMethodWorker.call(TestMethodWithDataProviderMethodWorker.java:77)
-at org.testng.internal.TestMethodWithDataProviderMethodWorker.call(TestMethodWithDataProviderMethodWorker.java:15)
-at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
-at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:539)
-at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
-at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
-at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
-at java.base/java.lang.Thread.run(Thread.java:833)
-]]>
-            </full-stacktrace>
-          </exception> <!-- org.testng.internal.thread.ThreadTimeoutException -->
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- HomePagePerformanceTest -->
-      </class> <!-- com.ebay.PerformanceTesting.HomePageLoadTest -->
+        </test-method> <!-- SearchResultPage -->
+      </class> <!-- com.ebay.PerformanceTesting.SearchResultLoadTest -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>

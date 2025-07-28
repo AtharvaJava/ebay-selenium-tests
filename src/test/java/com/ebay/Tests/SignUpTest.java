@@ -22,13 +22,14 @@ public class SignUpTest extends Base {
 		 super();
 	 }
 	 
-	 @BeforeClass
+	 @BeforeSuite
 	 public void SetUp() {
 		     
 		 Initialization();
 		 
 		 signup=new SignUpPage(DriverFactory.getDriver());
 	 }
+	 
 	 
 	 @Test
 	 public void ClickSignUpButton() throws InterruptedException {
@@ -39,7 +40,8 @@ public class SignUpTest extends Base {
 	 }
 	 
 	 
-	 @AfterClass
+	 
+	 @AfterSuite
 	 public void QuitDriver() {
 		    
 			if(Objects.nonNull(DriverFactory.getDriver())) {

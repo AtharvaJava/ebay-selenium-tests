@@ -2,6 +2,7 @@ package com.ebay.Tests;
 
 import java.util.Objects;
 
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeClass;
@@ -12,18 +13,20 @@ import com.ebay.base.Base;
 import com.ebay.base.DriverFactory;
 import com.ebay.pages.SearchResult;
 import com.ebay.pages.SignUpPage;
+import com.ebay.utils.Utils;
 
 public class SearchResultTest extends Base{
 
 	 SearchResult searchResult;
 	 SignUpPage signup;
+	 Utils util;
 	 
 	 public SearchResultTest() {
 		   
 		  super();
 	 }
 	 
-	 @BeforeClass
+	 @BeforeSuite
 	 public void SetUp() {
 		 
 		  Initialization();
@@ -32,9 +35,14 @@ public class SearchResultTest extends Base{
 	 }
 	 
 	 @Test (priority=1)
-	 public void VerifySearchResultAfterEnteringText() throws InterruptedException {
+	 public void VerifySearchResultAfterEnteringText() throws InterruptedException, InvalidFormatException {
 		 
-		 searchResult.EnterText();
+
+          Object[][] testData = util.getTestData("Results");
+         String searchItem = testData[0][0].toString();
+
+		 
+		 searchResult.EnterText(searchItem);
 		 
 	 }
 	 
@@ -51,27 +59,15 @@ public class SearchResultTest extends Base{
 		   searchResult.VerifySortingFromLowestToHighest();
 	 }
 	 
-//	 
-//	 @Test(priority=4)
-//	 
-//	 public void VerifySortingFunctionalityFromHighestToLowest() throws InterruptedException{
-//		 
-//		 searchResult.VerifySortingHighestToLowest();
-//	 }
-	 
-
 	 
 	 @Test (priority=4)
 	 public void VerifyPagination() throws InterruptedException{
-      
+     
 		   searchResult.Pagination();
 	 }
 	 
 	 
-	 
-	 
-
-	 @AfterClass
+	 @AfterSuite
 	 public void Quit() {
 		   
 		 if(Objects.nonNull(DriverFactory.getDriver())) {

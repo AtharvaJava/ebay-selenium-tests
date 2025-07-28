@@ -12,7 +12,7 @@ public class TestListner implements ITestListener{
 
     @Override
     public void onTestFailure(ITestResult result) {
-        ScreenshotUtil.captureScreenshot(DriverFactory.getDriver(), result.getName());
+        ScreenshotUtil.captureFailedTestCaseScreenshot(DriverFactory.getDriver(), result.getName());
     }
 
 

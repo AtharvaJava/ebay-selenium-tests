@@ -22,6 +22,8 @@ import com.relevantcodes.extentreports.LogStatus;
 
 public class ExtentReporterNG implements IReporter {
 	private ExtentReports extent;
+	
+	ScreenshotUtil screenshot_util;
 
 	public void generateReport(List<XmlSuite> xmlSuites, List<ISuite> suites,
 			String outputDirectory) {
@@ -33,7 +35,6 @@ public class ExtentReporterNG implements IReporter {
 
 			for (ISuiteResult r : result.values()) {
 				ITestContext context = r.getTestContext();
-
 				buildTestNodes(context.getPassedTests(), LogStatus.PASS);
 				buildTestNodes(context.getFailedTests(), LogStatus.FAIL);
 				buildTestNodes(context.getSkippedTests(), LogStatus.SKIP);

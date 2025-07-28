@@ -3,11 +3,13 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="com.ebay.PerformanceTesting.HomePageLoadTest">
+      <class name="com.ebay.Tests.SearchResultTest">
         <methods>
-          <include name="HomePagePerformanceTest" invocation-numbers="3 1 2 0"/>
+          <include name="SetUp"/>
+          <include name="VerifySearchResultAfterEnteringText"/>
+          <include name="Quit"/>
         </methods>
-      </class> <!-- com.ebay.PerformanceTesting.HomePageLoadTest -->
+      </class> <!-- com.ebay.Tests.SearchResultTest -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

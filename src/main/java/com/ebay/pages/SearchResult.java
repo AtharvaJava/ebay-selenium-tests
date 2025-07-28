@@ -63,9 +63,9 @@ public class SearchResult {
 	}
 	 
 	//Verify After Entering Valid Text in TextBox whether search result displayed or not
-	public void EnterText() throws InterruptedException {
+	public void EnterText(String searchItem) throws InterruptedException {
 		
-		method.EnteringText(driver, SearchTextBox, "Laptop");
+		method.EnteringText(driver, SearchTextBox, searchItem);
 		
 		Thread.sleep(3000);
 		
@@ -147,6 +147,8 @@ public class SearchResult {
     	  method.ClickOnWebElement(driver, SortingBy_LowestPrice);
     	  
     	  Thread.sleep(4000);
+    	  
+    	 
     	  
       }
       
