@@ -21,10 +21,6 @@ public static String captureFailedTestCaseScreenshot(WebDriver driver,String tes
         String timestamp = new SimpleDateFormat("dd_MM_yyyy").format(new Date());
         
 
-//       JavascriptExecutor js = (JavascriptExecutor) driver;
-//       js.executeScript("arguments[0].style.border='3px solid red'", failedElement);
-
-
         String filePath = "FailedScreenshots/" + testName + "_" +timestamp + ".png";
         try {
             FileUtils.copyFile(srcFile, new File(filePath));

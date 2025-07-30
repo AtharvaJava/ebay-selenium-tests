@@ -1,5 +1,7 @@
 package com.ebay.PerformanceTesting;
 
+import java.awt.BorderLayout;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -12,8 +14,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import javax.imageio.ImageIO;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
 import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
 import org.jfree.chart.ChartUtils;
 import org.jfree.chart.JFreeChart;
 import org.jfree.data.category.DefaultCategoryDataset;
@@ -33,18 +40,21 @@ public class SearchResultLoadTest {
 	  WebDriver driver;
 	 
 	  private static final Map<Long, Long> searchDurations = new HashMap<>();
-
-
-	     private static final String timestamp = new SimpleDateFormat("dd_MM_yyyy").format(new Date());
+      private static final String timestamp = new SimpleDateFormat("dd_MM_yyyy").format(new Date());
 		  
 	  SearchResult searchResult;
 	  long startTime;
+      private JFreeChart chart;
+      private ChartPanel chartPanel;
+      private JFrame frame;
+      private DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 	  
-	  
-	  
+      
 	  @Test
 	  public void SearchResultPage() {
-		    
+		  
+		  setupLiveChart(); 
+		  
 		  try { 
 			  
 			    searchResult=new SearchResult(DriverFactory.getDriver());
@@ -53,6 +63,10 @@ public class SearchResultLoadTest {
 	            DriverFactory.setDriver(driver);
 
 	            driver.get("https://www.ebay.com");
+	            
+	            driver.manage().window().maximize();
+	            
+	            driver.manage().deleteAllCookies();
 	            
 	            driver.findElement(By.xpath("//input[@id='gh-ac']")).sendKeys("Laptop");
 	            
@@ -69,20 +83,20 @@ public class SearchResultLoadTest {
 	            
 	            List<WebElement> PageLinks=driver.findElements(By.xpath("//ol[@class='pagination__items']//li//a"));
 	            
-	            for(int i=0;i<PageLinks.size();i++) {
+	            for(int i=0;i<8;i++) {
 	            	   
-	            	    try {
+	             try {
 	            	   
 
-                       long startTime = System.currentTimeMillis();
+                      long startTime = System.currentTimeMillis();
  
-                       PageLinks.get(i).click();
+                      PageLinks.get(i).click();
                        
-                       Thread.sleep(4000);
+                      Thread.sleep(4000);
                       
-                       driver.navigate().back();
+                      driver.navigate().back();
 
-                       Thread.sleep(5000);
+                      Thread.sleep(5000);
                        
 
                       long endTime = System.currentTimeMillis();
@@ -90,6 +104,9 @@ public class SearchResultLoadTest {
 
                       searchDurations.put((long) (i+1), duration);
                       LogtoCsv_SearchResult(i + 1, String.valueOf(duration));
+
+
+                      updateChart(i + 1, duration); 
 
 	            	    	
 	            	    }catch(Exception e) {
@@ -109,71 +126,104 @@ public class SearchResultLoadTest {
 			    
 			    synchronized(SearchResultLoadTest.class) {
 			    	
-			    	 generateSummaryStatistics();
-			         generateBarChart();
+                            generateSummaryStatistics();
+//                            saveChartAsImage();
+
+
+                            chartPanel.repaint();
+                            try {
+                                Thread.sleep(2000); // Wait for repaint to complete
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+
+
+                            captureChartScreenshot("Ebay/reports/LiveChartScreenshot_" + timestamp + ".png");
+
+                            JOptionPane.showMessageDialog(null, "Test complete. Close this window to exit.");
+
 			    }
 		  }
 		   
 	  }
-	  
-	  public synchronized void LogtoCsv_SearchResult(int PaginationNumber ,String durations) {
-		  
-		  
-		  String timestamp = new SimpleDateFormat("dd_MM_yyyy").format(new Date()); 
+	    
+    private void setupLiveChart() {
+	
+        chart = ChartFactory.createBarChart(
+                "Search Duration per Pagination",
+                "Pagination Number",
+                "Duration (ms)",
+                dataset
+        );
 
-          String filePath = "Ebay/reports/PerformanceResult_SearchResultPage.csv"+timestamp;
-          File file = new File(filePath);
-          file.getParentFile().mkdirs();
-           boolean fileExists = file.exists();
+        chartPanel = new ChartPanel(chart);
+        frame = new JFrame("Live Search Duration Chart");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setLayout(new BorderLayout());
+        frame.add(chartPanel, BorderLayout.CENTER);
+        frame.setSize(800, 600);
+        frame.setVisible(true);
+    }
+    
+    private void updateChart(int paginationNumber, long duration) {
+        dataset.addValue(duration, "Duration", String.valueOf(paginationNumber));
+        chart.fireChartChanged();
+    }
 
-		   try(PrintWriter writer = new PrintWriter(new FileWriter(filePath, true))) {
-		   if (!fileExists) {
-			   
-               writer.println("Pagination,Duration(ms)");
-           }
-           writer.println(PaginationNumber + "," + durations);
+    public synchronized void LogtoCsv_SearchResult(int paginationNumber, String durations) {
+        String filePath = "Ebay/reports/PerformanceResult_SearchResultPage_" + timestamp + ".csv";
+        File file = new File(filePath);
+        file.getParentFile().mkdirs();
+        boolean fileExists = file.exists();
 
-		   }catch(Exception e) {
-			    
-			   e.printStackTrace();
-		   }
-	   }
-	  
-	  private void generateSummaryStatistics() {
-	       DescriptiveStatistics stats = new DescriptiveStatistics();
-	       for (long duration : searchDurations.values()) {
-	           stats.addValue(duration);
-	       }
+        try (PrintWriter writer = new PrintWriter(new FileWriter(filePath, true))) {
+            if (!fileExists) {
+                writer.println("Pagination,Duration(ms)");
+            }
+            writer.println(paginationNumber + "," + durations);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
-	       System.out.println("\n--- Summary Statistics ---");
-	       System.out.println("Mean: " + stats.getMean());
-	       System.out.println("Min: " + stats.getMin());
-	       System.out.println("Max: " + stats.getMax());
-	       System.out.println("Std Dev: " + stats.getStandardDeviation());
-	   }
+    private void generateSummaryStatistics() {
+        DescriptiveStatistics stats = new DescriptiveStatistics();
+        for (long duration : searchDurations.values()) {
+            stats.addValue(duration);
+        }
 
-	   private void generateBarChart() {
+        System.out.println("\n--- Summary Statistics ---");
+        System.out.println("Mean: " + stats.getMean());
+        System.out.println("Min: " + stats.getMin());
+        System.out.println("Max: " + stats.getMax());
+        System.out.println("Std Dev: " + stats.getStandardDeviation());
+    }
 
-       DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+    private void saveChartAsImage() {
+        try {
+            
+        	File chartFile = new File("Ebay/reports/SearchDurationChart_" + timestamp + ".png");
+            ChartUtils.saveChartAsPNG(chartFile, chart, 800, 600);
+            System.out.println("Chart saved to: " + chartFile.getAbsolutePath());
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
 
-       for (Entry<Long, Long> entry : searchDurations.entrySet()) {
-           
-    	   dataset.addValue(entry.getValue(), "Duration", String.valueOf(entry.getKey()));
-       }
+private void captureChartScreenshot(String filePath) {
 
-    JFreeChart chart = ChartFactory.createBarChart(
-        "Search Duration per Pagination",
-        "Pagination Number",
-        "Duration (ms)",
-        dataset
-    );
-
-    try {
-        File chartFile = new File("Ebay/reports/SearchDurationChart_" + timestamp + ".png");
-        ChartUtils.saveChartAsPNG(chartFile, chart, 800, 600);
-        System.out.println("Chart saved to: " + chartFile.getAbsolutePath());
+try {
+        BufferedImage image = new BufferedImage(chartPanel.getWidth(), chartPanel.getHeight(), BufferedImage.TYPE_INT_ARGB);
+        chartPanel.paint(image.getGraphics()); 
+        File outputFile = new File(filePath);
+        ImageIO.write(image, "png", outputFile);
+        System.out.println("Live chart screenshot saved to: " + outputFile.getAbsolutePath());
     } catch (IOException e) {
         e.printStackTrace();
     }
-	   }
+
+}
+
 }

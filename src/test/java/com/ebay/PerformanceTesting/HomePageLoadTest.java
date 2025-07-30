@@ -175,7 +175,7 @@ for (Map.Entry<String, Long> entry : searchDurations.entrySet()) {
        JFreeChart chart = ChartFactory.createBarChart(
            "Search Duration per Item",
            "Search Item",
-           "Duration (ms)",
+           "Duration(ms)",
            dataset
        );
 

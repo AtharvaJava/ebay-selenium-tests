@@ -2,23 +2,20 @@ package com.ebay.base;
 
 import org.openqa.selenium.WebDriver;
 
+import com.epam.healenium.SelfHealingDriver;
+
+
+
 public class DriverFactory {
 
 	
 
 private static ThreadLocal<WebDriver> driver = new ThreadLocal<>();
 
-
+//	private static ThreadLocal<SelfHealingDriver> driver = new ThreadLocal<>();
 
     public static WebDriver getDriver() {
     	  
-
-
-//               if (driver.get() == null) {
-//                  
-//            	   throw new IllegalStateException("WebDriver instance is null. It may have been quit already.");
-//               
-//               }
 
     	 return driver.get();
     }
@@ -26,9 +23,10 @@ private static ThreadLocal<WebDriver> driver = new ThreadLocal<>();
     
     public static void setDriver(WebDriver driverInstance) {
     	
-    	
+//    	SelfHealingDriver healingDriver = SelfHealingDriver.create(driverInstance);
     	  driver.set(driverInstance);
-    	  
+    	
+//    	driver.set(healingDriver);    	  
     	 
     }
     
