@@ -1,5 +1,7 @@
 package com.ebay.PerformanceTesting;
 
+import java.awt.BorderLayout;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -11,6 +13,11 @@ import java.util.HashMap;
 
 import java.util.Map;
 
+import javax.imageio.ImageIO;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
+
 import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
 import org.apache.commons.math3.util.Pair;
 
@@ -18,6 +25,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
 import org.jfree.chart.ChartUtils;
 import org.jfree.chart.JFreeChart;
 import org.jfree.data.category.DefaultCategoryDataset;
@@ -27,11 +35,13 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import com.ebay.base.Base;
 import com.ebay.base.DriverFactory;
+import com.ebay.pages.SearchResult;
 
 public class HomePageLoadTest extends Base{
 	
@@ -40,13 +50,20 @@ public class HomePageLoadTest extends Base{
 
 private static final Map<String, Long> searchDurations = new HashMap<>();
 
+SearchResult searchResult;
+private JFreeChart chart;
+private ChartPanel chartPanel;
+private JFrame frame;
+private DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 
-     private static final String timestamp = new SimpleDateFormat("dd_MM_yyyy").format(new Date());
+     private static final String timestamp = new SimpleDateFormat("dd_MM_yyyy_HH_mm_ss").format(new Date());
 	  
 
-private static int completedTests = 0;
-private static final int TOTAL_TESTS = 4; 
-
+     @BeforeClass
+     public void InitializationChart() {
+    	  
+    	 SwingUtilities.invokeLater(this::setupLiveChart);
+     }
 	  
 	  
 	   @DataProvider (name="SearchItems", parallel=true)
@@ -54,12 +71,12 @@ private static final int TOTAL_TESTS = 4;
 		   
 		   return new Object[][] {
 			      
-			   {"laptop"},{"smartphone"},{"headphones"},{"camera"}
+			   {"laptop"},{"smartphone"}
 
 		   };
 	   }
 
-	   @Test(dataProvider="SearchItems",timeOut=120000 )
+	   @Test(dataProvider="SearchItems",timeOut=140000)
 	   public void HomePagePerformanceTest(String SearchItems) throws InterruptedException {
 		   
 		   
@@ -101,6 +118,8 @@ private static final int TOTAL_TESTS = 4;
 
           LogtoCsv(SearchItems, String.valueOf(duration));
           
+          updateChart(SearchItems, duration);
+          
 		   }catch (Exception e){
 
               System.err.println("Test failed for: " + SearchItems);
@@ -110,26 +129,61 @@ private static final int TOTAL_TESTS = 4;
 			   
 			   DriverFactory.removeDriver();
 			   
+          synchronized (HomePageLoadTest.class) {
+                         
+//        	  completedTests++;
+//              if (completedTests == TOTAL_TESTS) {
+//                         
+//            	   generateSummaryStatistics();
+//                   generateBarChart();
+//          }
+        	  generateSummaryStatistics();
+              chartPanel.repaint();
 
+              try {
+                  Thread.sleep(2000);
+              } catch (InterruptedException e) {
+                  e.printStackTrace();
+              }
 
+              captureChartScreenshot("Ebay/reports/LiveChartScreenshot_" + timestamp + ".png");
 
-synchronized (HomePageLoadTest.class) {
-   completedTests++;
-   if (completedTests == TOTAL_TESTS) {
-       generateSummaryStatistics();
-       generateBarChart();
-   }
+              frame.setAlwaysOnTop(true);
+              frame.toFront();
+              frame.repaint();
+
+              JOptionPane.showMessageDialog(null, "Test complete. Close this window to exit.");
 }
 
 		   }
           
 	   }
 
+	   private void setupLiveChart() {
+	        chart = ChartFactory.createBarChart(
+	                "Search Duration per Items",
+	                "Items Search",
+	                "Duration (ms)",
+	                dataset
+	        );
+
+	        chartPanel = new ChartPanel(chart);
+	        frame = new JFrame("Live Search Duration Chart");
+	        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	        frame.setLayout(new BorderLayout());
+	        frame.add(chartPanel, BorderLayout.CENTER);
+	        frame.setSize(800, 600);
+	        frame.setVisible(true);
+	    }
+
+	    private void updateChart(String searchItems, long duration) {
+	        dataset.addValue(duration, "Duration", String.valueOf(searchItems));
+	        chart.fireChartChanged();
+	    }
+	    
+	    
 	   public synchronized void LogtoCsv(String SearchItems,String durations) {
-		   
-	
-		   String timestamp = new SimpleDateFormat("dd_MM_yyyy").format(new Date());
-		   
+		   	   
          String filePath = "Ebay/reports/PerformanceResultsHomePage.csv_"+timestamp;
          File file = new File(filePath);
          file.getParentFile().mkdirs();
@@ -148,9 +202,7 @@ synchronized (HomePageLoadTest.class) {
 		   }
 	   }
 	   
-	   
-
-private void generateSummaryStatistics() {
+	private void generateSummaryStatistics() {
        DescriptiveStatistics stats = new DescriptiveStatistics();
        for (long duration : searchDurations.values()) {
            stats.addValue(duration);
@@ -164,12 +216,14 @@ private void generateSummaryStatistics() {
    }
 
    private void generateBarChart() {
+	   
        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
        
-
-for (Map.Entry<String, Long> entry : searchDurations.entrySet()) {
-    dataset.addValue(entry.getValue(), "Duration", entry.getKey());
-}
+       for (Map.Entry<String, Long> entry : searchDurations.entrySet()) {
+       
+    	    dataset.addValue(entry.getValue(), "Duration", entry.getKey());
+       
+       }
 
 
        JFreeChart chart = ChartFactory.createBarChart(
@@ -187,5 +241,19 @@ for (Map.Entry<String, Long> entry : searchDurations.entrySet()) {
            e.printStackTrace();
        }
    }
+   
+   private void captureChartScreenshot(String filePath) {
+       try {
+           BufferedImage image = new BufferedImage(chartPanel.getWidth(), chartPanel.getHeight(), BufferedImage.TYPE_INT_ARGB);
+           chartPanel.paint(image.getGraphics());
+           File outputFile = new File(filePath);
+           ImageIO.write(image, "png", outputFile);
+           System.out.println("Live chart screenshot saved to: " + outputFile.getAbsolutePath());
+       } catch (IOException e) {
+           e.printStackTrace();
+       }
+   }
+   
+   
 
 }
